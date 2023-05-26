@@ -9,11 +9,13 @@ dates = []
 prices = []
 
 def get_data(filename):
+    count = 0
     with open(filename, 'r') as csvfile:
         csvFileReader = csv.reader(csvfile)
         next(csvFileReader) # skipping column names
         for row in csvFileReader:
-            dates.append(int(row[0].split('-')))
+            dates.append(count)
+            count-=1
             prices.append(float(row[1]))
     return
 
@@ -39,7 +41,7 @@ def predict_price(dates, prices, x):
 
     return svr_rbf.predict(x)[0], svr_lin.predict(x)[0], svr_poly.predict(x)[0]
 
-# get_data('aapl.csv') # calling get_data method by passing the csv file to it
+get_data('AAPL.csv') # calling get_data method by passing the csv file to it
 print("Dates - ", dates)
 print("Prices- ", prices)
 

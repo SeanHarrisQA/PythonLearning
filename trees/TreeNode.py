@@ -28,3 +28,10 @@ class TreeNode:
     def add_child(self, child):
         child.parent = self
         self.children.append(child)
+
+    def calc_nodes(self):
+        nodes = 1
+        for child in self.children:
+           nodes += child.calc_nodes()
+        return nodes
+    

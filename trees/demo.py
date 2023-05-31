@@ -13,4 +13,4 @@ gels.add_child(abhijit)
 root.print_tree("name", 0)
 root.print_tree("designation", 1)
 root.print_tree("both", 2)
-
+print(root.calc_nodes())

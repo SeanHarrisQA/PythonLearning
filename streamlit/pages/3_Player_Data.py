@@ -13,12 +13,12 @@ def load_match_data():
     we = pd.json_normalize(wal_eng, sep='_').assign(match_id="3857261")
     return we
 
-st.header('Player Analysis')
+st.header('Player analysis')
 
 # Variables used throughout the script
 pitch_width = 120
 pitch_height = 80
-player = 'Harry Maguire'
+player = 'Luke Shaw'
 
 # Start of page
 st.subheader(player)
@@ -36,17 +36,19 @@ fig.set_facecolor('black')
 for a_pass in passes_1st.iterrows():
     length = a_pass[1][0]
     angle = a_pass[1][1]
-    x_end = a_pass[1][2][0] 
+    x_end = a_pass[1][2][0]
     y_end = pitch_height-a_pass[1][2][1]
     x_start = a_pass[1][3][0]
     y_start = pitch_height-a_pass[1][3][1]
     plt.arrow(x_start, y_start, x_end-x_start, y_end - y_start, color='red', head_width=1.5, head_length=2, length_includes_head=True)
 # Show the plot on the page
+fig.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
 st.pyplot(fig)
 
 # Heatmap for a given player
 st.caption('Heat Map')
-# Initalise heats
+# Initalise heats - N.B the way the pitch heights are initialised means there is no need to flip the coordinates
+# in the y-axis as with other functions
 heats = np.zeros((121,81), int)
 # Drop unnecessary rows
 bool = (we['player_name'] == player) & (we['location'].notnull()) & (we['period'] == 1)

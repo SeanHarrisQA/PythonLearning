@@ -13,4 +13,7 @@ def load_match_data():
     we = pd.json_normalize(wal_eng, sep='_').assign(match_id="3857261")
     return we
 
-st.header('Team Analysis')
+st.header('Team analysis')
+
+with st.sidebar:
+    team = st.sidebar.radio("Select a team", ('Both', 'Wales', 'England'))
